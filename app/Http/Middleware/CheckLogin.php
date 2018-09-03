@@ -34,7 +34,7 @@ class CheckLogin
             $this->global ['role_text'] = $this->roleText;
         }
         
-        if($request->path() === "/") { return redirect('/dashboard'); }
+//        if($request->path() === "/") { return redirect('/dashboard'); }
 
         return $next($request);
     }

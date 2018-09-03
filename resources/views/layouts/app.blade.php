@@ -64,16 +64,16 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="assets/dist/img/avatar.png" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">Kishor Mali</span>
+                  <img src="{{ asset('dist/img/avatar.png') }}" class="user-image" alt="User Image"/>
+                  <span class="hidden-xs">{{ Session::get('name') }}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="assets/dist/img/avatar.png" class="img-circle" alt="User Image" />
+                    <img src="{{ asset('dist/img/avatar.png') }}" class="img-circle" alt="User Image" />
                     <p>
-                      Kishor Mali
-                      <small>System Administrator</small>
+                      {{ Session::get('name') }}
+                      <small>{{ Session::get('roleText') }}</small>
                     </p>
                   </li>
                   <!-- Menu Footer-->

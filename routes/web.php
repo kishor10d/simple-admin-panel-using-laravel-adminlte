@@ -15,7 +15,8 @@
 //     return view('welcome');
 // });
 
-Route::get('/', 'LoginController@index')->middleware('checkLogin');
+Route::get('/', 'LoginController@index');
 Route::post('/loginMe', 'LoginController@loginMe');
 
+Route::get('/logout', 'UserController@logout');
 Route::get('/dashboard', 'UserController@index')->middleware('checkLogin');
