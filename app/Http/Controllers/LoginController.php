@@ -40,8 +40,8 @@ class LoginController extends Controller
         $email = $request->input("email");
         $password = $request->input("password");
 
-        $user = DB::table('tbl_users as BaseTbl')
-                ->join('tbl_roles as Roles', 'Roles.roleId', '=', 'BaseTbl.roleId')
+        $user = DB::table('users as BaseTbl')
+                ->join('roles as Roles', 'Roles.roleId', '=', 'BaseTbl.roleId')
                 ->select('BaseTbl.userId', 'BaseTbl.password', 'BaseTbl.name', 'BaseTbl.roleId', 'Roles.role')
                 ->where([ ['BaseTbl.email', '=',  $email], ['BaseTbl.isDeleted', '=', 0]])
                 ->first();

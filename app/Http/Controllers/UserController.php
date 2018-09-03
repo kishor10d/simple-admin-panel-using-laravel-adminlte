@@ -25,7 +25,7 @@ class UserController extends BaseController
         return redirect('/');
     }
     
-    public function users
+    public function users()
     {
         return view("users");
     }

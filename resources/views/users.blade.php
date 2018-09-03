@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-xs-12 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addNew"><i class="fa fa-plus"></i> Add New</a>
+                    <a class="btn btn-primary" href="#"><i class="fa fa-plus"></i> Add New</a>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                   
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <?php echo $this->pagination->create_links(); ?>
+                    
                 </div>
               </div><!-- /.box -->
             </div>
