@@ -8,35 +8,30 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
-{
-
-    public function index()
+{    
+    public function index(Request $request)
     {
-        return view("login");
+        return self::isLoggedIn($request);        
     }
     
     /**
      * This function used to check the user is logged in or not
      */
-    function isLoggedIn()
+    function isLoggedIn($request)
     {
-        $isLoggedIn = $this->session->userdata('isLoggedIn');
-        
-        if(!isset($isLoggedIn) || $isLoggedIn != TRUE)
-        {
-            $this->load->view('login');
-        }
-        else
-        {
-            redirect('/dashboard');
+        if ( $request->session()->has('isLoggedIn') && $request->session()->get('isLoggedIn') == TRUE) {
+            return redirect('/dashboard');
+        } else {
+            return view("login");
         }
     }
 
+    /**
+     * This function used to authenticate login user credentials
+     * @param {object} $request : This is Request object
+     */
     public function loginMe(Request $request)
     {
-        // dd(request()->all());
-        // dd($request->input("email"));
-
         $request->validate([
             'email' => 'required|max:255',
             'password' => 'required',
@@ -51,26 +46,23 @@ class LoginController extends Controller
                 ->where([ ['BaseTbl.email', '=',  $email], ['BaseTbl.isDeleted', '=', 0]])
                 ->first();
         
-        if(!empty($user)){
-            if(Hash::check($password, $user->password)){
-                // dd($user);
-
+        if(!empty($user))
+        {
+            if(Hash::check($password, $user->password))
+            {
                 $sessionArray = array('userId'=>$user->userId,                    
-                                            'role'=>$user->roleId,
-                                            'roleText'=>$user->role,
-                                            'name'=>$user->name,
-                                            'isLoggedIn' => TRUE
-                                    );
+                                        'role'=>$user->roleId,
+                                        'roleText'=>$user->role,
+                                        'name'=>$user->name,
+                                        'isLoggedIn' => TRUE);
 
                 $request->session()->put($sessionArray);
 
-                // dd($request->session()->all());
-
                 return redirect('/dashboard');
             }
-            else {
-                $request->session()->flash('error', 'Email or password mismatch');
-                
+            else
+            {
+                $request->session()->flash('error', 'Email or password missmatch');    
                 return redirect('/');
             }
         }
