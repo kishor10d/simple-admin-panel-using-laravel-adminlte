@@ -20,3 +20,4 @@ Route::post('/loginMe', 'LoginController@loginMe');
 
 Route::get('/logout', 'UserController@logout');
 Route::get('/dashboard', 'UserController@index')->middleware('checkLogin');
+Route::get('/users', 'UserController@users')->middleware('checkLogin');
