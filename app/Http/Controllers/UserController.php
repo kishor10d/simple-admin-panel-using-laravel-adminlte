@@ -27,6 +27,11 @@ class UserController extends BaseController
     
     public function users()
     {
-        return view("users");
+        $users = DB::table('tbl_users as BaseTbl')
+                ->select('BaseTbl.userId', 'BaseTbl.name', 'BaseTbl.email', 'BaseTbl.mobile', 'BaseTbl.roleId', 'BaseTbl.createdDtm', 'R.role')
+                ->leftJoin('tbl_roles as R', 'BaseTbl.roleId', '=', 'R.roleId')
+                ->where("BaseTbl.roleId", "<>", 1)->paginate(1);
+
+        return view("users.index", ["users"=>$users]);
     }
 }

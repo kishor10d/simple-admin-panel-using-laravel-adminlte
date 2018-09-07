@@ -40,8 +40,8 @@ class LoginController extends Controller
         $email = $request->input("email");
         $password = $request->input("password");
 
-        $user = DB::table('users as BaseTbl')
-                ->join('roles as Roles', 'Roles.roleId', '=', 'BaseTbl.roleId')
+        $user = DB::table('tbl_users as BaseTbl')
+                ->join('tbl_roles as Roles', 'Roles.roleId', '=', 'BaseTbl.roleId')
                 ->select('BaseTbl.userId', 'BaseTbl.password', 'BaseTbl.name', 'BaseTbl.roleId', 'Roles.role')
                 ->where([ ['BaseTbl.email', '=',  $email], ['BaseTbl.isDeleted', '=', 0]])
                 ->first();
@@ -50,13 +50,22 @@ class LoginController extends Controller
         {
             if(Hash::check($password, $user->password))
             {
+                $lastLogin = DB::table('tbl_last_login')->select('createdDtm')->where(['userId'=>$user->userId])->orderBy('id', 'desc')->first();
+
                 $sessionArray = array('userId'=>$user->userId,                    
                                         'role'=>$user->roleId,
                                         'roleText'=>$user->role,
                                         'name'=>$user->name,
-                                        'isLoggedIn' => TRUE);
+                                        'lastLogin'=> $lastLogin == null ? "First Time Login" : $lastLogin->createdDtm,
+                                        'isLoggedIn' => TRUE);                                        
 
                 $request->session()->put($sessionArray);
+
+                unset($sessionArray['userId'], $sessionArray['isLoggedIn'], $sessionArray['lastLogin']);
+
+                $loginInfo = array("userId"=>$user->userId, "sessionData" => json_encode($sessionArray), "machineIp"=>$request->ip(), "userAgent"=>$request->header('User-Agent'), "agentString"=>$request->header('User-Agent'), "platform"=>"");
+
+                DB::table('tbl_last_login')->insert($loginInfo);
 
                 return redirect('/dashboard');
             }

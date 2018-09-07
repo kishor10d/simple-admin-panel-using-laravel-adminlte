@@ -43,13 +43,23 @@
                         <th>Created On</th>
                         <th class="text-center">Actions</th>
                     </tr>
-                  </table>
-                  
+                    @foreach($users as $rec)
+                    <tr>
+                        <td>{{$rec->name}}</td>
+                        <td>{{$rec->email}}</td>
+                        <td>{{$rec->mobile}}</td>
+                        <td>{{$rec->role}}</td>
+                        <td>{{$rec->createdDtm}}</td>
+                        <td></td>
+                    </tr> 
+                    @endforeach
+                  </table>                  
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    
+                    {{ $users->links() }}
                 </div>
               </div><!-- /.box -->
+              
             </div>
         </div>
     </section>

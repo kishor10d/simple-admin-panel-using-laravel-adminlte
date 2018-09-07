@@ -58,7 +58,7 @@
                   <i class="fa fa-history"></i>
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="header"> Last Login : <i class="fa fa-clock-o"></i>First Time Login</li>
+                  <li class="header"> Last Login : <i class="fa fa-clock-o"></i> {{Session::get('lastLogin')}}</li>
                 </ul>
               </li>
               <!-- User Account: style can be found in dropdown.less -->
@@ -128,7 +128,7 @@
               </a>
             </li>
             <li class="treeview">
-              <a href="#">
+              <a href="users">
                 <i class="fa fa-users"></i>
                 <span>Users</span>
               </a>
