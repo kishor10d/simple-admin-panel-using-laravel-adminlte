@@ -25,6 +25,9 @@ class UserController extends BaseController
         return redirect('/');
     }
     
+    /**
+     * This function used to show users listing
+     */
     public function users()
     {
         $users = DB::table('tbl_users as BaseTbl')
@@ -35,6 +38,9 @@ class UserController extends BaseController
         return view("users.index", ["users"=>$users]);
     }
 
+    /**
+     * This is function used to load the create user screen
+     */
     public function create()
     {
         $roles = DB::table('tbl_roles')->where('roleId', '<>', 1)->get();
@@ -62,5 +68,20 @@ class UserController extends BaseController
         else { $response = false; }
 
         return response()->json($response);
+    }
+
+    /**
+     * This function used to create new user
+     */
+    public function createUser(Request $request)
+    {
+        $request->validate([
+            'fname' => 'required|max:255',
+            'email' => 'required|max:255',
+            'password' => 'required',
+            'cpassword' => 'required_with:password|same:password',
+            'mobile'=> 'required|numeric',
+            'roleId'=> 'required|numeric'
+        ]);
     }
 }

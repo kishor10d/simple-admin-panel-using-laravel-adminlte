@@ -23,3 +23,4 @@ Route::get('/dashboard', 'UserController@index')->middleware('checkLogin');
 Route::get('/users', 'UserController@users')->middleware('checkLogin');
 Route::get('/users/create', 'UserController@create')->middleware('checkLogin');
 Route::post('/users/checkEmailExists', 'UserController@checkEmailExists')->middleware('checkLogin');
+Route::post('/users/createUser', 'UserController@createUser')->middleware('checkLogin');

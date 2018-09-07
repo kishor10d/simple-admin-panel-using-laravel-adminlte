@@ -25,7 +25,7 @@
                         <h3 class="box-title">Enter User Details</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" id="addUser" action="addNewUser" method="post" role="form">
+                    <form role="form" id="addUser" action="{{ URL::to('users/createUser') }}" method="post" role="form">
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-6">                                
@@ -112,5 +112,5 @@
     </section>
     
 </div>
-<script src="{{ asset('js/addUser.js') }}" type="text/javascript"></script>
+<!-- <script src="{{ asset('js/addUser.js') }}" type="text/javascript"></script> -->
 @endsection
