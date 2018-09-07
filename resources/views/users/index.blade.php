@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'CodeInsect | Dashboard')
+@section('title', 'CodeInsect | User Management')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-xs-12 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="#"><i class="fa fa-plus"></i> Add New</a>
+                    <a class="btn btn-primary" href="users/create"><i class="fa fa-plus"></i> Add New</a>
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>@yield('title')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />    
@@ -24,7 +25,7 @@
     <!-- jQuery 2.1.4 -->
     <script src="{{ asset('js/jQuery-2.1.4.min.js') }}"></script>
     <script type="text/javascript">
-        var baseURL = "";
+      var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     </script>
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

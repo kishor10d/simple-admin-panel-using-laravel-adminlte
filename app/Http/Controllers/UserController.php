@@ -34,4 +34,33 @@ class UserController extends BaseController
 
         return view("users.index", ["users"=>$users]);
     }
+
+    public function create()
+    {
+        $roles = DB::table('tbl_roles')->where('roleId', '<>', 1)->get();
+
+        return view("users.create", ["roles"=>$roles]);
+    }
+
+    /**
+     * This function is used to check whether email id is already exist or not
+     * @param {string} $email : This is email id
+     * @param {number} $userId : This is user id
+     * @return {mixed} $result : This is searched result
+     */
+    public function checkEmailExists(Request $request)
+    {
+        $email = $request->input("email");
+        $userId = $request->input("userId");
+
+        $query = DB::table('tbl_users')->where([ ['email', '=' , $email], ['isDeleted', '=', 0] ]);
+        if($userId != 0){ $query->where('userId', '!=', $userId); }
+        $result = $query->first();
+
+        $response = false;
+        if(empty($result)){ $response = true; }
+        else { $response = false; }
+
+        return response()->json($response);
+    }
 }
