@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-xs-12 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addNew"><i class="fa fa-plus"></i> Add New</a>
+                    <a class="btn btn-primary" href="#"><i class="fa fa-plus"></i> Add New</a>
                 </div>
             </div>
         </div>
@@ -43,13 +43,20 @@
                         <th>Created On</th>
                         <th class="text-center">Actions</th>
                     </tr>
-                  </table>
-                  
+                    @foreach($users as $rec)
+                    <tr>
+                        <td>{{$rec->name}}</td>
+                        <td>{{$rec->email}}</td>
+                        <td>{{$rec->mobile}}</td>
+                        <td>{{$rec->role}}</td>
+                        <td>{{$rec->createdDtm}}</td>
+                        <td></td>
+                    </tr> 
+                    @endforeach
+                  </table>                  
                 </div><!-- /.box-body -->
-                <div class="box-footer clearfix">
-                    <?php echo $this->pagination->create_links(); ?>
-                </div>
               </div><!-- /.box -->
+              {{ $users->links() }}
             </div>
         </div>
     </section>

@@ -128,7 +128,7 @@
               </a>
             </li>
             <li class="treeview">
-              <a href="#">
+              <a href="users">
                 <i class="fa fa-users"></i>
                 <span>Users</span>
               </a>
